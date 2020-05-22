@@ -63,7 +63,7 @@ export const EditForm = observer(({ todo, onClose }: Props) => {
         <Button variant="default" onClick={close}>
           Cancel
         </Button>
-        <Button className="ml-3" variant="primary" type="submit">
+        <Button className="ml-3" variant="round" type="submit">
           {todo ? 'Update' : 'Add Task'}
         </Button>
       </div>

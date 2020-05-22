@@ -13,7 +13,7 @@ export const AddTodo = observer(() => {
     <section className="mb-4 text-center">
       {isFormVisible
         ? <EditForm onClose={toggleForm} />
-        : <Button variant="outline-primary" onClick={toggleForm}>Add New Task</Button>}
+        : <Button variant="round" onClick={toggleForm}>Add New Task</Button>}
     </section>
   );
 });

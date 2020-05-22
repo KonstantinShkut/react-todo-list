@@ -110,6 +110,13 @@
     display: block;
 }
 
+.btn-round, .btn-round:hover, .btn-round:active {
+    border-radius: 100px;
+    color: white;
+    background-color: #03bbe4;
+    padding: .5rem 1.25rem;
+}
+
 .react-datepicker-wrapper {
     display: block !important;
 }
