@@ -27,4 +27,4 @@ The app uses browser's local storage to persist the data between sessions so if 
 
 This is how the app looks like
 
-![Screenshot](screenshot.png?raw=true "Screenshot")
+![Screenshot](screenshot-new.png?raw=true "Screenshot")
