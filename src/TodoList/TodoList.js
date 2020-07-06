@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/useStore';
 import TodoListItem from './TodoListItem';
 import { AddTodo } from './AddTodo';
-import logo from './logo.png';
 import './TodoList.css';
 
 export const TodoList = observer(() => {
@@ -13,10 +12,7 @@ export const TodoList = observer(() => {
   const isListEmpty = !store.todos.length;
 
   return (
-    <>
-      <div className="text-center">
-        <img src={logo} className="logo" alt="logo" />
-      </div>
+    <div className="my-5">
       <AddTodo />
       {isListEmpty && <p className="text-center text-muted">
         You don't have any tasks yet. <br />
@@ -30,6 +26,6 @@ export const TodoList = observer(() => {
           onToggle={store.toggleTodo}
         />)}
       </ul>
-    </>
+    </div>
   );
 });
