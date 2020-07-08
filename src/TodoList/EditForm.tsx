@@ -1,28 +1,27 @@
-// @flow
-
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useStore } from '../store/useStore';
 import { useInput } from '../hooks/useInput';
 import { dateFormat } from '../store/createStore';
-import type { Todo } from '../store/createStore';
+import { Todo } from '../store/createStore';
 
-type Props = {
+interface Props {
   todo?: Todo;
   onClose: () => void;
-};
+}
 
 export const EditForm = observer(({ todo, onClose }: Props) => {
   const store = useStore();
   const [name, nameProps, resetName] = useInput(todo ? todo.name : '');
   const [description, descriptionProps, resetDescription] = useInput(todo ? todo.description : '');
-  const [due, setDue] = useState(todo && todo.due ? moment(todo.due).toDate() : '');
+  const [due, setDue] = useState<Date | null>(todo && todo.due ? moment(todo.due).toDate() : null);
 
-  const saveTodo = (e) => {
+  const saveTodo = (e: React.FormEvent) => {
     e.preventDefault();
     const dueDate = due && moment(due).format(dateFormat);
     const data = { name, description, due: dueDate };
@@ -35,7 +34,7 @@ export const EditForm = observer(({ todo, onClose }: Props) => {
   const close = () => {
     resetName();
     resetDescription();
-    setDue('');
+    setDue(null);
     onClose();
   };
 
@@ -49,7 +48,7 @@ export const EditForm = observer(({ todo, onClose }: Props) => {
         <Form.Control placeholder="Name" required {...nameProps} />
       </Form.Group>
       <Form.Group>
-        <Form.Control as="textarea" rows="2" placeholder="Description" {...descriptionProps} />
+        <Form.Control as="textarea" rows={2} placeholder="Description" {...descriptionProps} />
       </Form.Group>
       <Form.Group>
         <DatePicker

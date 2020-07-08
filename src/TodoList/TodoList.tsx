@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/useStore';
@@ -12,7 +10,7 @@ export const TodoList = observer(() => {
   const isListEmpty = !store.todos.length;
 
   return (
-    <div className="my-5">
+    <div>
       <AddTodo />
       {isListEmpty && <p className="text-center text-muted">
         You don't have any tasks yet. <br />

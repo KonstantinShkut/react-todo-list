@@ -1,13 +1,13 @@
-// @flow
-
 import React from 'react';
 import { createStore } from './createStore';
 import { useLocalStore } from 'mobx-react-lite';
 
-const storeContext = React.createContext(null);
+type Store = ReturnType<typeof createStore>;
 
-export const StoreProvider = ({ children }) => {
-  const store = useLocalStore(createStore)
+const storeContext = React.createContext<Store | null>(null);
+
+export const StoreProvider = ({ children }: any) => {
+  const store = useLocalStore(createStore);
   return (
     <storeContext.Provider value={store}>
       {children}

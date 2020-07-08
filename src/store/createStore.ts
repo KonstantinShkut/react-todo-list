@@ -1,15 +1,13 @@
-// @flow
-
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 
-export type Todo = {
+export interface Todo {
   id: string;
   name: string;
   description: string;
-  due: string;
-  completedDate?: string;
-};
+  due: string | null;
+  completedDate?: string | null;
+}
 
 export const dateFormat = 'MM/DD/YYYY';
 
@@ -21,7 +19,8 @@ const demoTodo = {
 };
 
 const rehydrateStorage = (): Array<Todo> => {
-  return JSON.parse(localStorage.getItem('store')) || [demoTodo];
+  const store = localStorage.getItem('store');
+  return store ? JSON.parse(store) : [demoTodo];
 };
 
 const syncStore = (todos: Array<Todo>) => {
@@ -31,16 +30,16 @@ const syncStore = (todos: Array<Todo>) => {
 export const createStore = () => ({
   todos: rehydrateStorage(),
 
-  addTodo(data) {
-    const todo: Todo = {
+  addTodo(data: Partial<Todo>) {
+    const todo = {
       id: uuidv4(),
       ...data,
-    };
+    } as Todo;
     this.todos = [todo, ...this.todos];
     syncStore(this.todos);
   },
 
-  updateTodo(id, data) {
+  updateTodo(id: string, data: Partial<Todo>) {
     const index = this.todos.findIndex(todo => todo.id === id);
     const todo = this.todos[index];
     this.todos = [
@@ -65,6 +64,9 @@ export const createStore = () => ({
 
   toggleTodo({ id }: Todo) {
     const todo = this.todos.find(item => item.id === id);
+    if (!todo) {
+      return;
+    }
     const data = {
       completedDate: todo.completedDate ? null : moment().format()
     };

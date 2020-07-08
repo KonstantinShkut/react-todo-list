@@ -1,15 +1,13 @@
-// @flow
-
 import React, { useState } from 'react';
-import type { Todo } from '../store/createStore';
 import moment from 'moment';
 import { EditForm } from './EditForm';
+import { Todo } from '../store/createStore';
 
-type Props = {
+interface Props {
   todo: Todo;
   onDelete: (todo: Todo) => void;
   onToggle: (todo: Todo) => void;
-};
+}
 
 const TodoListItem = ({ todo, onDelete, onToggle }: Props) => {
   const [isEditing, setEditing] = useState(false);

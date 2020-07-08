@@ -1,8 +1,6 @@
-// @flow
-
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import { observer } from 'mobx-react-lite';
-import { Button } from 'react-bootstrap';
 import { EditForm } from './EditForm';
 
 export const AddTodo = observer(() => {
